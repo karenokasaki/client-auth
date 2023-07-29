@@ -9,18 +9,28 @@ function SignupPage() {
       name: "",
       telefone: "",
    });
-
-   const [isPasswordValid, setIsPasswordValid] = useState(true); // State para validação da senha
+   const [picture, setPicture] = useState(null); // State para armazenar a imagem do usuário
 
    const navigate = useNavigate();
 
    function handleChange(e) {
       setForm({ ...form, [e.target.name]: e.target.value });
+   }
 
-      // Realiza a validação da senha em tempo real
-      const passwordRegex =
-         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
-      setIsPasswordValid(passwordRegex.test(e.target.value));
+   async function handleUpload(e) {
+      const file = e.target.files[0];
+      console.log(file);
+      // Cria um objeto do tipo FormData
+      const formData = new FormData();
+
+      formData.append("picture", file);
+      // Envia o arquivo para o servidor
+      const response = await axios.post(
+         "http://localhost:4000/upload/image",
+         formData
+      );
+
+      setPicture(response.data.url);
    }
 
    async function handleSubmit(event) {
@@ -28,7 +38,10 @@ function SignupPage() {
       try {
          const response = await axios.post(
             "http://localhost:4000/user/signup",
-            form
+            {
+               ...form,
+               profilePicture: picture,
+            }
          );
          console.log(response);
 
@@ -75,12 +88,6 @@ function SignupPage() {
                   className="border border-gray-400 rounded p-2 w-full focus:outline-none focus:border-blue-500"
                   required
                />
-               {!isPasswordValid && (
-                  <p className="text-red-500 text-xs">
-                     Deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1
-                     letra minúscula, 1 número e 1 caractere especial.
-                  </p>
-               )}
             </div>
             <div className="mb-4">
                <label
@@ -114,6 +121,45 @@ function SignupPage() {
                   required
                />
             </div>
+            <div className="mb-4">
+               <label
+                  htmlFor="profilePicture"
+                  className="block text-gray-700 font-bold mb-2"
+               >
+                  Profile Picture
+               </label>
+               <div className="flex items-center justify-center bg-grey-lighter">
+                  <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue">
+                     <svg
+                        className="w-8 h-8"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                     >
+                        <path
+                           fillRule="evenodd"
+                           d="M10 12a2 2 0 100-4 2 2 0 000 4z"
+                           clipRule="evenodd"
+                        />
+                        <path
+                           fillRule="evenodd"
+                           d="M2 10a8 8 0 1116 0 8 8 0 01-16 0zm8-6a6 6 0 100 12 6 6 0 000-12z"
+                           clipRule="evenodd"
+                        />
+                     </svg>
+                     <span className="mt-2 text-base leading-normal">
+                        Select a file
+                     </span>
+                     <input
+                        type="file"
+                        name="profilePicture"
+                        onChange={handleUpload}
+                        className="hidden"
+                     />
+                  </label>
+               </div>
+            </div>
+
             <div className="flex justify-center">
                <button
                   type="submit"
