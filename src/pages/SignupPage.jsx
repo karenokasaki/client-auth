@@ -1,7 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
+   
+   const navigate = useNavigate();
+
    const [form, setForm] = useState({
       name: "",
       email: "",
@@ -19,11 +23,16 @@ function SignupPage() {
       try {
          //lógica de submit do form
 
-         const response = await axios.post("http://localhost:4000/user/signup", form);
+         await axios.post(
+            "http://localhost:4000/user/signup",
+            form
+         );
 
-         console.log(response);
+         navigate("/login");
       } catch (error) {
          // lógico se der erro na requisição
+         alert("Erro ao cadastrar usuário");
+         console.log(error);
       }
    }
 
@@ -41,6 +50,7 @@ function SignupPage() {
                   name="name"
                   value={form.name}
                   onChange={handleChange}
+                  required
                />
             </div>
 
@@ -51,6 +61,7 @@ function SignupPage() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
+                  required
                />
             </div>
 
@@ -61,6 +72,7 @@ function SignupPage() {
                   name="telefone"
                   value={form.telefone}
                   onChange={handleChange}
+                  required
                />
             </div>
 
@@ -71,6 +83,7 @@ function SignupPage() {
                   name="password"
                   value={form.password}
                   onChange={handleChange}
+                  required
                />
             </div>
 
