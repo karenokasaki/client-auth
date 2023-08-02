@@ -25,6 +25,10 @@ function LoginPage() {
          //guardar o token que vem da resposta do servidor
          console.log(response);
 
+         const token = response.data.token;
+
+         localStorage.setItem("user", token);
+
          navigate("/profile"); // Redirecionar para a página de dashboard após o login bem-sucedido
       } catch (error) {
          console.log(error);
