@@ -2,7 +2,7 @@ import api from "../axios/api";
 import { useState, useEffect } from "react";
 
 function ProfilePage() {
-   const [user, setUser] = useState({});
+   const [user, setUser] = useState();
 
    useEffect(() => {
       async function getProfile() {
@@ -19,12 +19,16 @@ function ProfilePage() {
 
    console.log(user);
 
-   // Nome
-   // Telefone
-   // Foto
+ 
    return (
       <div>
          <h1>Profile Page</h1>
+
+         <h1>Olá, {user.name}</h1>
+
+         <p>Email: {user.email}</p>
+
+         <img src={user.profilePicture} width={100} />
       </div>
    );
 }
