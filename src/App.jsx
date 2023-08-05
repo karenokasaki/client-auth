@@ -4,6 +4,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
+import ProtectRoute from "./components/ProtectRoute";
 
 function App() {
    return (
@@ -11,9 +12,15 @@ function App() {
          <Navbar />
          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
             <Routes>
+               {/* Rotas que não devem ser protegidas */}
                <Route path="/" element={<SignupPage />} />
                <Route path="/login" element={<LoginPage />} />
-               <Route path="/profile" element={<ProfilePage />} />
+
+               {/* Rota protegida */}
+               <Route
+                  path="/profile"
+                  element={<ProtectRoute Component={ProfilePage} />}
+               />
             </Routes>
          </div>
       </div>

@@ -39,18 +39,25 @@ function SignupPage() {
    async function handleSubmit(e) {
       //lógica de submit do form
       e.preventDefault();
+      console.log("Botão de cadastrar foi clicado");
       try {
          // const url = chamada para api de upload
+         console.log("Invocação da função para pegar a url");
+
          const url = await getUrl(photo);
+
+         console.log("Upload feito. Url da foto: ", url);
 
          const formWithPhoto = {
             ...form,
             profilePicture: url,
          };
 
-         console.log(formWithPhoto);
+         console.log("Form com a url da foto adicionado");
 
          await axios.post("http://localhost:4000/user/signup", formWithPhoto);
+
+         console.log("Usuário criado com a foto");
 
          navigate("/login");
       } catch (error) {
@@ -63,6 +70,7 @@ function SignupPage() {
    function handlePhoto(e) {
       //  console.log(e.target.files[0]); -> onde a foto está guardada
       setPhoto(e.target.files[0]);
+      console.log("Foto foi escolhida");
    }
 
    return (
