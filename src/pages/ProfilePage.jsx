@@ -1,8 +1,11 @@
 import api from "../axios/api";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
-   const [user, setUser] = useState();
+   const [user, setUser] = useState({});
+
+   const navigate = useNavigate();
 
    useEffect(() => {
       async function getProfile() {
@@ -17,9 +20,12 @@ function ProfilePage() {
       getProfile();
    }, []);
 
-   console.log(user);
+   function handleLogout(e) {
+      e.preventDefault();
+      localStorage.removeItem("userToken");
+      navigate("/login");
+   }
 
- 
    return (
       <div>
          <h1>Profile Page</h1>
@@ -29,6 +35,8 @@ function ProfilePage() {
          <p>Email: {user.email}</p>
 
          <img src={user.profilePicture} width={100} />
+
+         <button onClick={handleLogout}>Logout</button>
       </div>
    );
 }

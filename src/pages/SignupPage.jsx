@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../axios/api";
 
 function SignupPage() {
-   
    const navigate = useNavigate();
 
    const [form, setForm] = useState({
@@ -12,21 +12,39 @@ function SignupPage() {
       telefone: "",
       password: "",
    });
+   const [photo, setPhoto] = useState();
 
    // controll input
    function handleChange(e) {
       setForm({ ...form, [e.target.name]: e.target.value });
    }
 
+   async function getUrl(photo) {
+      //photo = state com a foto guardada
+      try {
+         const multiPartForm = new FormData();
+
+         multiPartForm.append("picture", photo);
+
+         const response = await api.post("/upload/file", multiPartForm);
+
+         return response.url;
+      } catch (error) {
+         console.log(error);
+      }
+   }
+
    async function handleSubmit(e) {
+      //lógica de submit do form
       e.preventDefault();
       try {
-         //lógica de submit do form
+         // const url = chamada para api de upload
+         const url = await getUrl(photo);
 
-         await axios.post(
-            "http://localhost:4000/user/signup",
-            form
-         );
+         await axios.post("http://localhost:4000/user/signup", {
+            ...form,
+            profilePicture: url,
+         });
 
          navigate("/login");
       } catch (error) {
@@ -36,7 +54,13 @@ function SignupPage() {
       }
    }
 
+   function handlePhoto(e) {
+      //  console.log(e.target.files[0]); -> onde a foto está guardada
+      setPhoto(e.target.files[0]);
+   }
+
    console.log(form);
+   console.log(photo);
 
    return (
       <div>
@@ -84,6 +108,15 @@ function SignupPage() {
                   value={form.password}
                   onChange={handleChange}
                   required
+               />
+            </div>
+
+            <div>
+               <label>Foto de perfil</label>
+               <input
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  onChange={handlePhoto}
                />
             </div>
 
