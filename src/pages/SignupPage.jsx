@@ -19,18 +19,19 @@ function SignupPage() {
 
    async function handleUpload(e) {
       const file = e.target.files[0];
-      console.log(file);
+
       // Cria um objeto do tipo FormData
       const formData = new FormData();
 
       formData.append("picture", file);
+
       // Envia o arquivo para o servidor
       const response = await axios.post(
          "http://localhost:4000/upload/image",
          formData
       );
 
-      setPicture(response.data.url);
+      setPicture(response.data.path);
    }
 
    async function handleSubmit(event) {
@@ -50,8 +51,6 @@ function SignupPage() {
          console.log(error);
       }
    }
-
-   
 
    return (
       <div className="max-w-md mx-auto mt-8">
