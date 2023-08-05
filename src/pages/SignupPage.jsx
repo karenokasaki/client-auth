@@ -28,7 +28,9 @@ function SignupPage() {
 
          const response = await api.post("/upload/file", multiPartForm);
 
-         return response.url;
+         console.log(response);
+
+         return response.data.url;
       } catch (error) {
          console.log(error);
       }
@@ -41,10 +43,14 @@ function SignupPage() {
          // const url = chamada para api de upload
          const url = await getUrl(photo);
 
-         await axios.post("http://localhost:4000/user/signup", {
+         const formWithPhoto = {
             ...form,
             profilePicture: url,
-         });
+         };
+
+         console.log(formWithPhoto);
+
+         await axios.post("http://localhost:4000/user/signup", formWithPhoto);
 
          navigate("/login");
       } catch (error) {
@@ -58,9 +64,6 @@ function SignupPage() {
       //  console.log(e.target.files[0]); -> onde a foto está guardada
       setPhoto(e.target.files[0]);
    }
-
-   console.log(form);
-   console.log(photo);
 
    return (
       <div>
