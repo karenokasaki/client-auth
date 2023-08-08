@@ -1,20 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 function Navbar() {
-   const [isLoggedIn, setIsLoggedIn] = useState(false);
-   const location = useLocation();
-   //check when user changes page
+   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
-   useEffect(() => {
-      // Verificar se o token está no localStorage
-      const token = localStorage.getItem("userToken");
-      if (token) {
-         setIsLoggedIn(true);
-      } else {
-         setIsLoggedIn(false);
-      }
-   }, [location]);
+   console.log("isLoggedIn", isLoggedIn);
 
    return (
       <nav className="bg-white shadow">
@@ -27,7 +18,11 @@ function Navbar() {
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                         alt="Workflow"
                      />
-                     <span className="text-lg font-bold ml-2">Dev Suport</span>
+                     <Link to="/">
+                        <span className="text-lg font-bold ml-2">
+                           Dev Suport
+                        </span>
+                     </Link>
                   </div>
                </div>
 
@@ -55,7 +50,7 @@ function Navbar() {
                   // Se não estiver logado
                   <div className="flex items-center">
                      <Link
-                        to="/"
+                        to="/signup"
                         className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                      >
                         Sign up
