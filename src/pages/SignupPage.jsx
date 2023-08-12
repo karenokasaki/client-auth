@@ -14,6 +14,8 @@ function SignupPage() {
    });
    const [photo, setPhoto] = useState();
 
+   const [userType, setUserType] = useState("user");
+
    // controll input
    function handleChange(e) {
       setForm({ ...form, [e.target.name]: e.target.value });
@@ -55,9 +57,18 @@ function SignupPage() {
 
          console.log("Form com a url da foto adicionado");
 
-         await axios.post("http://localhost:4000/user/signup", formWithPhoto);
-
-         console.log("Usuário criado com a foto");
+         if (userType === "user") {
+            await axios.post(
+               "http://localhost:4000/user/signup",
+               formWithPhoto
+            );
+         }
+         if (userType === "business") {
+            await axios.post(
+               "http://localhost:4000/business/signup",
+               formWithPhoto
+            );
+         }
 
          navigate("/login");
       } catch (error) {
@@ -73,11 +84,37 @@ function SignupPage() {
       console.log("Foto foi escolhida");
    }
 
+   function handleRadio(e) {
+      setUserType(e.target.value);
+   }
+
    return (
       <div>
          <h1>Signup Page</h1>
 
          <form onSubmit={handleSubmit}>
+            <div>
+               <label>
+                  Usuário
+                  <input
+                     type="radio"
+                     name="userType"
+                     value="user"
+                     onChange={handleRadio}
+                  />
+               </label>
+
+               <label>
+                  Empresa
+                  <input
+                     type="radio"
+                     name="userType"
+                     value="business"
+                     onChange={handleRadio}
+                  />
+               </label>
+            </div>
+
             <div>
                <label>Nome Completo</label>
                <input

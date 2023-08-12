@@ -10,6 +10,8 @@ function LoginPage() {
       password: "",
    });
 
+   const [userType, setUserType] = useState("user");
+
    function handleChange(e) {
       setForm({ ...form, [e.target.name]: e.target.value });
    }
@@ -18,21 +20,36 @@ function LoginPage() {
       e.preventDefault();
       try {
          //lógica de submit do form
+         let response;
 
-         const response = await axios.post(
-            "http://localhost:4000/user/login",
-            form
-         );
+         if (userType === "user") {
+            response = await axios.post(
+               "http://localhost:4000/user/login",
+               form
+            );
+         }
+
+         if (userType === "business") {
+            response = await axios.post(
+               "http://localhost:4000/business/login",
+               form
+            );
+         }
 
          //GUARDAR O TOKEN
          const token = response.data.token;
          localStorage.setItem("userToken", token);
 
-         navigate("/profile");
+         if (userType === "user") navigate("/profile");
+         if (userType === "business") navigate("/profile-business");
       } catch (error) {
-         // lógico se der erro na requisição
+         // lógica se der erro na requisição
          console.log(error);
       }
+   }
+
+   function handleRadio(e) {
+      setUserType(e.target.value);
    }
 
    return (
@@ -40,6 +57,28 @@ function LoginPage() {
          <h1>Login Page</h1>
 
          <form onSubmit={handleSubmit}>
+            <div>
+               <label>
+                  Usuário
+                  <input
+                     type="radio"
+                     name="userType"
+                     value="user"
+                     onChange={handleRadio}
+                  />
+               </label>
+
+               <label>
+                  Empresa
+                  <input
+                     type="radio"
+                     name="userType"
+                     value="business"
+                     onChange={handleRadio}
+                  />
+               </label>
+            </div>
+
             <div>
                <label>Email</label>
                <input
