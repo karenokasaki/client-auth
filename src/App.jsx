@@ -6,6 +6,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
 import ProtectRoute from "./components/ProtectRoute";
 import ProfileBusinessPage from "./pages/ProfileBusinessPage";
+import BusinessCreateOffer from "./pages/BusinessCreateOffer";
 
 function App() {
    return (
@@ -25,6 +26,10 @@ function App() {
                <Route
                   path="/profile-business"
                   element={<ProtectRoute Component={ProfileBusinessPage} />}
+               />
+               <Route
+                  path="/business/criar-vaga"
+                  element={<ProtectRoute Component={BusinessCreateOffer} />}
                />
             </Routes>
          </div>

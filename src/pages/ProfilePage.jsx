@@ -39,14 +39,10 @@ function ProfilePage() {
       navigate("/login");
    }
 
-   function classNames(...classes) {
-      return classes.filter(Boolean).join(" ");
-   }
-
    async function handleSubmitProfile(e) {
       e.preventDefault();
       try {
-         const response = await api.put("/user/edit", formProfile);
+         await api.put("/user/edit", formProfile);
          setReload(!reload);
       } catch (error) {
          console.log(error);
