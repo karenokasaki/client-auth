@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import ProtectRoute from "./components/ProtectRoute";
 import ProfileBusinessPage from "./pages/ProfileBusinessPage";
 import BusinessCreateOffer from "./pages/BusinessCreateOffer";
+import JobsPage from "./pages/JobsPage";
 
 function App() {
    return (
@@ -30,6 +31,11 @@ function App() {
                <Route
                   path="/business/criar-vaga"
                   element={<ProtectRoute Component={BusinessCreateOffer} />}
+               />
+
+               <Route
+                  path="/jobs"
+                  element={<ProtectRoute Component={JobsPage} />}
                />
             </Routes>
          </div>

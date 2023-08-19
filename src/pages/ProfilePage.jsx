@@ -1,6 +1,6 @@
 import api from "../axios/api";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 
 function ProfilePage() {
@@ -53,7 +53,14 @@ function ProfilePage() {
 
    return (
       <div>
-         <h1>Olá, {user.name}</h1>
+         <Link
+            to="/jobs"
+            className="mb-2 bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+         >
+            PROCURE SUA VAGA DE EMPREGO
+         </Link>
+
+         <h1 className="mt-4">Olá, {user.name}</h1>
 
          <p>Email: {user.email}</p>
 

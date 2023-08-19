@@ -63,7 +63,18 @@ export default function ProfileBusinessPage() {
             </Tab.List>
             <Tab.Panels className="mt-2">
                <Tab.Panel className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
-                  LISTAR OS JOBS
+                  <div>
+                     {business.offers &&
+                        business.offers.map((job) => {
+                           return (
+                              <div key={job._id}>
+                                 <h2>
+                                    {job.title} - {job.createdAt}
+                                 </h2>
+                              </div>
+                           );
+                        })}
+                  </div>
                </Tab.Panel>
 
                <Tab.Panel className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400">
