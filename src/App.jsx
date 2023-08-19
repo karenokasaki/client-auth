@@ -8,6 +8,7 @@ import ProtectRoute from "./components/ProtectRoute";
 import ProfileBusinessPage from "./pages/ProfileBusinessPage";
 import BusinessCreateOffer from "./pages/BusinessCreateOffer";
 import JobsPage from "./pages/JobsPage";
+import JobDetailPage from "./pages/JobDetailPage";
 
 function App() {
    return (
@@ -36,6 +37,11 @@ function App() {
                <Route
                   path="/jobs"
                   element={<ProtectRoute Component={JobsPage} />}
+               />
+
+               <Route
+                  path="/jobs/:id_job"
+                  element={<ProtectRoute Component={JobDetailPage} />}
                />
             </Routes>
          </div>

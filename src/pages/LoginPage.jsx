@@ -39,6 +39,7 @@ function LoginPage() {
          //GUARDAR O TOKEN
          const token = response.data.token;
          localStorage.setItem("userToken", token);
+         localStorage.setItem("userId", response.data.user._id);
 
          if (userType === "user") navigate("/profile");
          if (userType === "business") navigate("/profile-business");
