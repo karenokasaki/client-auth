@@ -135,7 +135,20 @@ function ProfilePage() {
                   </form>
                </Tab.Panel>
                <Tab.Panel className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
-                  LISTAR OS JOBS
+                  <div>
+                     {user.history_jobs?.map((job) => {
+                        return (
+                           <Link
+                              to={`/jobs/${job._id}`}
+                              key={job._id}
+                              className="flex justify-between"
+                           >
+                              <p>{job.title}</p>
+                              <p>{job.status}</p>
+                           </Link>
+                        );
+                     })}
+                  </div>
                </Tab.Panel>
             </Tab.Panels>
          </Tab.Group>
