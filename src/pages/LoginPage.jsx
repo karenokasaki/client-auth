@@ -42,6 +42,7 @@ function LoginPage() {
 
          localStorage.setItem("userToken", token);
          localStorage.setItem("userId", userId);
+         localStorage.setItem("role", userType);
 
          if (userType === "user") navigate("/profile");
          if (userType === "business") navigate("/profile-business");

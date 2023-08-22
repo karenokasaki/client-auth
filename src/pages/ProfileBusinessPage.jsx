@@ -68,9 +68,9 @@ export default function ProfileBusinessPage() {
                         business.offers.map((job) => {
                            return (
                               <div key={job._id}>
-                                 <h2>
+                                 <Link to={`/jobs/${job._id}`}>
                                     {job.title} - {job.createdAt}
-                                 </h2>
+                                 </Link>
                               </div>
                            );
                         })}
