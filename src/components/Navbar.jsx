@@ -4,7 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 function Navbar() {
    //acessando as informações do context
-   const { isLoggedIn } = useContext(AuthContext);
+   const { isLoggedIn, role } = useContext(AuthContext);
 
    const navigate = useNavigate();
 
@@ -14,6 +14,7 @@ function Navbar() {
       navigate("/login");
    }
 
+   console.log(role);
 
    return (
       <nav className="bg-white shadow">
@@ -49,12 +50,23 @@ function Navbar() {
 
                   {isLoggedIn === true && (
                      <>
-                        <Link
-                           to="/profile"
-                           className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                        >
-                           Profile
-                        </Link>
+                        {role === "BUSINESS" && (
+                           <Link
+                              to="/profile-business"
+                              className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                           >
+                              Profile
+                           </Link>
+                        )}
+                        {role === "USER" && (
+                           <Link
+                              to="/profile"
+                              className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                           >
+                              Profile
+                           </Link>
+                        )}
+
                         <button
                            onClick={handleLogout}
                            className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"

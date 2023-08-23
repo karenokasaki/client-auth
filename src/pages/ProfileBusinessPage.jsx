@@ -67,10 +67,13 @@ export default function ProfileBusinessPage() {
                      {business.offers &&
                         business.offers.map((job) => {
                            return (
-                              <div key={job._id}>
-                                 <h2>
+                              <div
+                                 key={job._id}
+                                 className="hover:bg-blue-200 p-2 rounded-sm"
+                              >
+                                 <Link to={`/jobs/${job._id}`}>
                                     {job.title} - {job.createdAt}
-                                 </h2>
+                                 </Link>
                               </div>
                            );
                         })}

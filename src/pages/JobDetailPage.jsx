@@ -1,9 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../axios/api";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function JobDetailPage() {
    const params = useParams();
+
+   const { isLoggedIn, role } = useContext(AuthContext);
+
    // o id do job está em -> params.id_job
 
    const navigate = useNavigate();
@@ -53,12 +57,16 @@ export default function JobDetailPage() {
             </p>
          </div>
 
-         <button
-            onClick={handleApply}
-            className="mt-4 bg-indigo-500 py-2 px-4 rounded-lg text-white hover:bg-indigo-600"
-         >
-            Me candidatar
-         </button>
+
+         {/* Mostrar o botão de candidatar-se apenas se for USER */}
+         {role === "USER" && (
+            <button
+               onClick={handleApply}
+               className="mt-4 bg-indigo-500 py-2 px-4 rounded-lg text-white hover:bg-indigo-600"
+            >
+               Me candidatar
+            </button>
+         )}
       </div>
    );
 }
