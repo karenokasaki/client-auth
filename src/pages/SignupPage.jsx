@@ -90,86 +90,158 @@ function SignupPage() {
 
    return (
       <div>
-         <h1>Signup Page</h1>
+         <div className="flex min-h-full flex-1 flex-col justify-center">
+            <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
+               <div className="bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                     <div className="flex gap-6 justify-evenly">
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
+                           Candidato
+                           <input
+                              type="radio"
+                              name="userType"
+                              value="user"
+                              onChange={handleRadio}
+                              className="form-radio h-4 w-4 text-indigo-600 ms-2"
+                           />
+                        </label>
 
-         <form onSubmit={handleSubmit}>
-            <div>
-               <label>
-                  Usuário
-                  <input
-                     type="radio"
-                     name="userType"
-                     value="user"
-                     onChange={handleRadio}
-                  />
-               </label>
+                        <label className="block text-sm font-medium leading-6 text-gray-900">
+                           Empresa
+                           <input
+                              type="radio"
+                              name="userType"
+                              value="business"
+                              onChange={handleRadio}
+                              className="form-radio h-4 w-4 text-indigo-600 ms-2"
+                           />
+                        </label>
+                     </div>
 
-               <label>
-                  Empresa
-                  <input
-                     type="radio"
-                     name="userType"
-                     value="business"
-                     onChange={handleRadio}
-                  />
-               </label>
+                     <div>
+                        <label
+                           htmlFor="name"
+                           className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                           Nome Completo
+                        </label>
+                        <input
+                           type="text"
+                           name="name"
+                           value={form.name}
+                           onChange={handleChange}
+                           required
+                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                     </div>
+
+                     <div>
+                        <label
+                           htmlFor="email"
+                           className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                           Email
+                        </label>
+                        <div className="mt-2">
+                           <input
+                              id="email"
+                              name="email"
+                              type="email"
+                              autoComplete="email"
+                              required
+                              value={form.email}
+                              onChange={handleChange}
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                           />
+                        </div>
+                     </div>
+
+                     <div>
+                        <label
+                           htmlFor="telefone"
+                           className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                           Telefone
+                        </label>
+                        <div className="mt-2">
+                           <input
+                              id="telefone"
+                              name="telefone"
+                              type="tel"
+                              autoComplete="tel"
+                              required
+                              value={form.telefone}
+                              onChange={handleChange}
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                           />
+                        </div>
+                     </div>
+
+                     <div>
+                        <label
+                           htmlFor="password"
+                           className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                           Senha
+                        </label>
+                        <div className="mt-2">
+                           <input
+                              id="password"
+                              name="password"
+                              type="password"
+                              autoComplete="current-password"
+                              required
+                              value={form.password}
+                              onChange={handleChange}
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                           />
+                        </div>
+                     </div>
+
+                     <div className="mt-2 flex items-center justify-center">
+                        <label
+                           htmlFor="photo"
+                           className="block text-sm font-medium leading-6 text-gray-900 mr-2"
+                        >
+                           Foto de perfil
+                        </label>
+                        <label className="bg-indigo-600 px-3 py-1.5 text-sm text-white rounded-md cursor-pointer hover:bg-indigo-500 focus:ring-indigo-600">
+                           Selecionar Foto
+                           <input
+                              type="file"
+                              accept="image/png, image/jpeg"
+                              id="photo"
+                              onChange={handlePhoto}
+                              className="sr-only"
+                           />
+                        </label>
+                     </div>
+
+                     <div>
+                        <button
+                           type="submit"
+                           className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        >
+                           CADASTRE-SE
+                        </button>
+                     </div>
+                  </form>
+
+                  {/* Adicionar whatsapp */}
+                  <p className="mt-10 text-center text-sm text-gray-500">
+                     Não conseguiu se cadastrar?{" "}
+                     <a
+                        href="https://wa.me/+5511981860227/?text=Não%20consegui%20me%20cadastrar%20no%20site"
+                        className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                     >
+                        Entre em contato com a gente!
+                     </a>
+                  </p>
+               </div>
             </div>
-
-            <div>
-               <label>Nome Completo</label>
-               <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-               />
-            </div>
-
-            <div>
-               <label>Email</label>
-               <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-               />
-            </div>
-
-            <div>
-               <label>Telefone</label>
-               <input
-                  type="tel"
-                  name="telefone"
-                  value={form.telefone}
-                  onChange={handleChange}
-                  required
-               />
-            </div>
-
-            <div>
-               <label>Senha</label>
-               <input
-                  type="password"
-                  name="password"
-                  value={form.password}
-                  onChange={handleChange}
-                  required
-               />
-            </div>
-
-            <div>
-               <label>Foto de perfil</label>
-               <input
-                  type="file"
-                  accept="image/png, image/jpeg"
-                  onChange={handlePhoto}
-               />
-            </div>
-
-            <button>CADASTRE-SE</button>
-         </form>
+         </div>
       </div>
    );
 }

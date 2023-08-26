@@ -9,6 +9,7 @@ import ProfileBusinessPage from "./pages/ProfileBusinessPage";
 import BusinessCreateOffer from "./pages/BusinessCreateOffer";
 import JobsPage from "./pages/JobsPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
    return (
@@ -17,8 +18,9 @@ function App() {
          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
             <Routes>
                {/* Rotas que não devem ser protegidas */}
-               <Route path="/" element={<SignupPage />} />
+               <Route path="/" element={<HomePage />} />
                <Route path="/login" element={<LoginPage />} />
+               <Route path="/signup" element={<SignupPage />} />
 
                {/* Rota protegida */}
                <Route
