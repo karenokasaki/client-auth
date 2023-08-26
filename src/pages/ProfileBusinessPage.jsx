@@ -62,24 +62,71 @@ export default function ProfileBusinessPage() {
                </Tab>
             </Tab.List>
             <Tab.Panels className="mt-2">
-               <Tab.Panel className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
-                  <div>
-                     {business.offers &&
-                        business.offers.map((job) => {
-                           return (
-                              <div
-                                 key={job._id}
-                                 className="hover:bg-blue-200 p-2 rounded-sm"
+               {/* VAGAS */}
+               <Tab.Panel className="rounded-xl  p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
+                  <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                     <table className="min-w-full divide-y divide-gray-300">
+                        <thead className="bg-gray-50">
+                           <tr>
+                              <th
+                                 scope="col"
+                                 className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                               >
-                                 <Link to={`/jobs/${job._id}`}>
-                                    {job.title} - {job.createdAt} - {job.status}
-                                 </Link>
-                              </div>
-                           );
-                        })}
+                                 Vaga
+                              </th>
+                              <th
+                                 scope="col"
+                                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                              >
+                                 Criada
+                              </th>
+                              <th
+                                 scope="col"
+                                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                              >
+                                 Status
+                              </th>
+
+                              <th
+                                 scope="col"
+                                 className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                              >
+                                 <span className="sr-only">Edit</span>
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200 bg-white">
+                           {business.offers &&
+                              business.offers.map((job) => (
+                                 <tr key={job._id}>
+                                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                       <Link to={`/jobs/${job._id}`}>
+                                          {job.title}
+                                       </Link>
+                                    </td>
+                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                       {job.createdAt}
+                                    </td>
+                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                       {job.status}
+                                    </td>
+
+                                    <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                       <Link
+                                          to={`/profile-business/job/${job._id}`}
+                                          className="text-indigo-600 hover:text-indigo-900"
+                                       >
+                                          Editar
+                                       </Link>
+                                    </td>
+                                 </tr>
+                              ))}
+                        </tbody>
+                     </table>
                   </div>
                </Tab.Panel>
 
+               {/* PROFILE */}
                <Tab.Panel className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400">
                   <form onSubmit={handleSubmitProfile}>
                      <div className="flex flex-col space-y-2 mb-2">
