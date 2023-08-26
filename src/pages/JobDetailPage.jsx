@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function JobDetailPage() {
    const params = useParams();
 
-   const { isLoggedIn, role } = useContext(AuthContext);
+   const { role } = useContext(AuthContext);
 
    const [alreadyApply, setAlreadyApply] = useState(false);
 
@@ -90,7 +90,7 @@ export default function JobDetailPage() {
             </button>
          )}
 
-         {id === job.business._id && (
+         {id === job.business?._id && (
             <div>
                {job.candidates?.map((candidate) => {
                   return (
