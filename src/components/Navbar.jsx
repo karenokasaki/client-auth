@@ -59,12 +59,20 @@ function Navbar() {
                            </Link>
                         )}
                         {role === "USER" && (
-                           <Link
-                              to="/profile"
-                              className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                           >
-                              Profile
-                           </Link>
+                           <>
+                              <Link
+                                 to="/jobs"
+                                 className="text-gray-50 bg-purple-400 hover:bg-purple-700 px-3 py-2 rounded-md text-sm font-medium"
+                              >
+                                 Vagas
+                              </Link>
+                              <Link
+                                 to="/profile"
+                                 className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                              >
+                                 Profile
+                              </Link>
+                           </>
                         )}
 
                         <button

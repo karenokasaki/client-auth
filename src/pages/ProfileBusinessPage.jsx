@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import api from "../axios/api";
 import { Tab } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import dataFormater from "../utils/dataFormater";
 
 export default function ProfileBusinessPage() {
    const [business, setBusiness] = useState({});
@@ -25,7 +26,7 @@ export default function ProfileBusinessPage() {
       }
 
       getProfile();
-   }, [reload]);
+   }, [reload, formProfile]);
 
    function handleChangeProfile(e) {
       setFormProfile({ ...formProfile, [e.target.name]: e.target.value });
@@ -54,16 +55,16 @@ export default function ProfileBusinessPage() {
 
          <Tab.Group>
             <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
-               <Tab className="w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 text-blue-100 hover:bg-white/[0.12] hover:text-white">
+               <Tab className="w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700 ring-white  text-blue-100 hover:bg-white/[0.12] hover:text-white">
                   Vagas
                </Tab>
-               <Tab className="w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 text-blue-100 hover:bg-white/[0.12] hover:text-white">
+               <Tab className="w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700 ring-white  text-blue-100 hover:bg-white/[0.12] hover:text-white">
                   Profile
                </Tab>
             </Tab.List>
             <Tab.Panels className="mt-2">
                {/* VAGAS */}
-               <Tab.Panel className="rounded-xl  p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
+               <Tab.Panel className="rounded-xl ring-white ">
                   <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                      <table className="min-w-full divide-y divide-gray-300">
                         <thead className="bg-gray-50">
@@ -105,7 +106,7 @@ export default function ProfileBusinessPage() {
                                        </Link>
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                       {job.createdAt}
+                                       {dataFormater(job.createdAt).onlyDate}
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                        {job.status}
@@ -113,7 +114,7 @@ export default function ProfileBusinessPage() {
 
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                        <Link
-                                          to={`/profile-business/job/${job._id}`}
+                                          to={`/business/editar-vaga/${job._id}`}
                                           className="text-indigo-600 hover:text-indigo-900"
                                        >
                                           Editar

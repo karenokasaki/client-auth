@@ -10,6 +10,8 @@ import BusinessCreateOffer from "./pages/BusinessCreateOffer";
 import JobsPage from "./pages/JobsPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import HomePage from "./pages/HomePage";
+import EditOffer from "./pages/EditOffer";
+import PublicJobDetailPage from "./pages/JobDetailPagePublic";
 
 function App() {
    return (
@@ -21,6 +23,10 @@ function App() {
                <Route path="/" element={<HomePage />} />
                <Route path="/login" element={<LoginPage />} />
                <Route path="/signup" element={<SignupPage />} />
+               <Route
+                  path="/jobs/:id_job/public"
+                  element={<PublicJobDetailPage />}
+               />
 
                {/* Rota protegida */}
                <Route
@@ -34,6 +40,10 @@ function App() {
                <Route
                   path="/business/criar-vaga"
                   element={<ProtectRoute Component={BusinessCreateOffer} />}
+               />
+               <Route
+                  path="/business/editar-vaga/:id_job"
+                  element={<ProtectRoute Component={EditOffer} />}
                />
 
                <Route
