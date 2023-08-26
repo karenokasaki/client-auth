@@ -44,7 +44,7 @@ export default function ProfileBusinessPage() {
    console.log(business);
 
    return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
          <Link
             to="/business/criar-vaga"
             className="bg-indigo-500 p-3 text-center text-white rounded-lg shadow-lg hover:bg-indigo-400"
@@ -61,25 +61,73 @@ export default function ProfileBusinessPage() {
                   Profile
                </Tab>
             </Tab.List>
-            <Tab.Panels className="mt-2">
-               <Tab.Panel className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
-                  <div>
-                     {business.offers &&
-                        business.offers.map((job) => {
-                           return (
-                              <div
-                                 key={job._id}
-                                 className="hover:bg-blue-200 p-2 rounded-sm"
+            <Tab.Panels className="">
+               <Tab.Panel className="rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2  focus:outline-none focus:ring-2">
+                  <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                     <table className="min-w-full divide-y  divide-gray-300 ">
+                        <thead className="bg-gray-50">
+                           <tr>
+                              <th
+                                 scope="col"
+                                 className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                               >
-                                 <Link to={`/jobs/${job._id}`}>
-                                    <span className="font-bold">
+                                 Vagas
+                              </th>
+                              <th
+                                 scope="col"
+                                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                              >
+                                 Data de Criação
+                              </th>
+                              <th
+                                 scope="col"
+                                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                              >
+                                 Status
+                              </th>
+
+                              <th
+                                 scope="col"
+                                 className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                              >
+                                 <span className="sr-only">Edit</span>
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200 bg-white">
+                           {business.offers?.map((job) => (
+                              <tr key={job._id} className="hover:bg-gray-50">
+                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                    <Link to={`/jobs/${job._id}`}>
                                        {job.title}
-                                    </span>{" "}
-                                    - {job.createdAt} - {job.status}
-                                 </Link>
-                              </div>
-                           );
-                        })}
+                                    </Link>
+                                 </td>
+                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    {job.createdAt}
+                                 </td>
+                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    {job.status}
+                                 </td>
+
+                                 <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 flex justify-evenly">
+                                    <Link
+                                       to={`/profile-business/edit-job/${job._id}`}
+                                       className="text-indigo-600 hover:text-indigo-900"
+                                    >
+                                       Editar vaga
+                                       <span className="sr-only">
+                                          , {job.title}
+                                       </span>
+                                    </Link>
+
+                                    <button className="text-red-400">
+                                       Deletar vaga
+                                    </button>
+                                 </td>
+                              </tr>
+                           ))}
+                        </tbody>
+                     </table>
                   </div>
                </Tab.Panel>
 

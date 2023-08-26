@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function JobDetailPage() {
    const params = useParams();
 
-   const { isLoggedIn, role } = useContext(AuthContext);
+   const { role } = useContext(AuthContext);
 
    const [alreadyApply, setAlreadyApply] = useState(false);
 
