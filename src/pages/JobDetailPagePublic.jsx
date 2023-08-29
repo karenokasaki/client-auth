@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import api from "../axios/api";
 import dataFormater from "../utils/dataFormater";
 import axios from "axios";
 
