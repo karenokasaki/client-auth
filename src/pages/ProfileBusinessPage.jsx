@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import api from "../axios/api";
 import { Tab } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import dateFormatter from "../utils/dateFormatter";
 
 export default function ProfileBusinessPage() {
    const [business, setBusiness] = useState({});
@@ -105,7 +106,7 @@ export default function ProfileBusinessPage() {
                                        </Link>
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                       {job.createdAt}
+                                       {dateFormatter(job.createdAt)}
                                     </td>
                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                        {job.status}
