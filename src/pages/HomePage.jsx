@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 export default function HomePage() {
    const [jobs, setJobs] = useState([]);
    const [search, setSearch] = useState("");
@@ -93,9 +94,12 @@ export default function HomePage() {
                         </div>
 
                         <div className="border-t pt-1">
-                           <p className="text-sm font-semibold leading-6 text-gray-800 hover:underline">
+                           <Link
+                              to={`/jobs/public/${job._id}`}
+                              className="text-sm font-semibold leading-6 text-gray-800 hover:underline"
+                           >
                               Ver detalhes &rarr;
-                           </p>
+                           </Link>
                         </div>
                      </div>
                   );

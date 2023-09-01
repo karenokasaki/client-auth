@@ -64,7 +64,7 @@ export default function ProfileBusinessPage() {
             </Tab.List>
             <Tab.Panels className="mt-2">
                {/* VAGAS */}
-               <Tab.Panel className="rounded-xl  p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
+               <Tab.Panel className="rounded-xl  p-3">
                   <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                      <table className="min-w-full divide-y divide-gray-300">
                         <thead className="bg-gray-50">
@@ -113,12 +113,14 @@ export default function ProfileBusinessPage() {
                                     </td>
 
                                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                       <Link
-                                          to={`/profile-business/job/${job._id}`}
-                                          className="text-indigo-600 hover:text-indigo-900"
-                                       >
-                                          Editar
-                                       </Link>
+                                       {job.status === "ABERTA" && (
+                                          <Link
+                                             to={`/business/editar-vaga/${job._id}`}
+                                             className="text-indigo-600 hover:text-indigo-900"
+                                          >
+                                             Editar
+                                          </Link>
+                                       )}
                                     </td>
                                  </tr>
                               ))}

@@ -120,7 +120,7 @@ function ProfilePage() {
                         Salvar alterações
                      </button>
                   </form>
-                  <div className="w-1/3 flex justify-center items-center rounded-lg">
+                  <div className="flex w-1/3 justify-center items-center rounded-lg">
                      <img src={user.profilePicture} className="rounded-lg" />
                   </div>
                </Tab.Panel>

@@ -11,6 +11,9 @@ function Navbar() {
    function handleLogout(e) {
       e.preventDefault();
       localStorage.removeItem("userToken");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("userRole");
+
       navigate("/login");
    }
 
